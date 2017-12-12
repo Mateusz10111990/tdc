@@ -34,3 +34,4 @@ build:
           npm install @angular/cli@latest
           npm install
           npm run-script ng build
+          
