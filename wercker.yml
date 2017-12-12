@@ -35,10 +35,21 @@ build:
           npm install
           ng build
           cd ..
-
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
         name: Create ACCS zip
         code: |
           zip -r tdc.zip config.js  package.json  public  routes  server.js manifest.json
+
+deploy-accs:
+  steps:
+    # Deploy to Oracle Application Container Cloud
+    - peternagy/oracle-accs-deploy@1.0.1:
+        opc_user: $OPC_USERNAME
+        opc_password: $OPC_PASSWORD
+        rest_url: $REST_URL
+        domain: $IDENTITY_DOMAIN
+        application_name: tdc-demo
+        application_type: node
+        file: tdc.zip
