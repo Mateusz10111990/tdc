@@ -52,6 +52,13 @@ build:
 
 deploy-accs:
   steps:
+
+   - script:
+        name: List directory contents
+        code: |
+          echo `pwd`
+          echo `ls`
+
     # Deploy to Oracle Application Container Cloud
     - peternagy/oracle-accs-deploy@1.0.1:
         opc_user: $OPC_USERNAME
