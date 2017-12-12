@@ -18,12 +18,12 @@ npm install
 
 Your Angular frontend code is located inside the `angular-src`.
 
-Do a `npm install -g @angular/cli@latest` and `npm install` inside the `angular-src` directory so that npm can install all the angular dependencies
+Do a `npm install @angular/cli@latest` and `npm install` inside the `angular-src` directory so that npm can install all the angular dependencies
 
-Still inside `angular-src` run the Angular-CLI's build:
+Still inside `angular-src` run the Angular-CLI's build (using locally installed angular):
 
 ```
-ng build
+npm run-script ng build
 ```
 
 this should compile the static code into the root `public` directory.
