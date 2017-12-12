@@ -39,7 +39,8 @@ insert into tdc_users (EMAIL,ROLE,PASSWORD,NAME,SURNAME) values ('ostatnia@secur
 
 create table tdc_posts (
    id number not null,
-   content varchar2(512 byte) not null
+   content varchar2(512 byte) not null,
+   constraint tdc_posts_pk primary key (id),
 );
 
 ALTER TABLE tdc_posts
