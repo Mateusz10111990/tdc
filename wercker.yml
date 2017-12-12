@@ -22,6 +22,13 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
+    - script:
+      name: install zip
+      code: |
+        #sudo apt-get update -y
+        #sudo apt-get upgrade -y
+        sudo apt-get install -y zip
+
     # A step that executes `npm install` command
     #- npm-install
 
@@ -41,7 +48,7 @@ build:
     - script:
         name: Create ACCS zip
         code: |
-          tar -cZf tdc.zip config.js package.json public routes server.js manifest.json
+          zip -r tdc.zip config.js package.json public routes server.js manifest.json
 
 deploy-accs:
   steps:
