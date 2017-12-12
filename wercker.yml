@@ -23,24 +23,25 @@ build:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
     # A step that executes `npm install` command
-    - npm-install
+    #- npm-install
 
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
-    - script:
-        name: Building Angular sources
-        code: |
-          cd angular-src
-          npm install -g @angular/cli@latest
-          npm install
-          ng build
-          cd ..
+    #- script:
+    #    name: Building Angular sources
+    #    code: |
+    #      echo "OK"
+          #cd angular-src
+          #npm install -g @angular/cli@latest
+          #npm install
+          #ng build
+          #cd ..
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
         name: Create ACCS zip
         code: |
-          zip -r tdc.zip config.js  package.json  public  routes  server.js manifest.json
+          tar -cZf tdc.zip config.js package.json public routes server.js manifest.json
 
 deploy-accs:
   steps:
