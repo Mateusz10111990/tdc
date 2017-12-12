@@ -28,10 +28,10 @@ build:
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
-        name: echo Building Angular sources
+        name: Building Angular sources
         code: |
           cd angular-src
-          npm install @angular/cli@latest
+          npm install -g @angular/cli@latest
           npm install
-          npm run-script ng build
+          ng build
           
