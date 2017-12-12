@@ -48,7 +48,8 @@ build:
     - script:
         name: Create ACCS zip
         code: |
-          zip -r tdc.zip config.js package.json public routes server.js manifest.json
+          mkdir target
+          zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
 
 deploy-accs:
   steps:
