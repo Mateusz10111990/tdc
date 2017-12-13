@@ -9,9 +9,9 @@ function post(req, res, next) {
 
     var email = req.body.email;
 
-    console.log('Executing GET ', `${config.api_ords}/users/?q={"email":"${email}"}`);
+    console.log('Executing GET ', `${config.api_ords}/tdc_users/?q={"email":"${email}"}`);
 
-    axios.get(`${config.api_ords}/users/?q={"email":"${email}"}`)
+    axios.get(`${config.api_ords}/tdc_users/?q={"email":"${email}"}`)
         .then(response => {
             var user = response.data.items[0];
 

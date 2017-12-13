@@ -46,7 +46,7 @@ function remove(req, res, next) {
 
   let todoId = req.params.todo_id;
   
-  console.log('Executing DELETE ', `${config.api_ords}/todos/?q={"id":${todoId}}`);
+  console.log('Executing DELETE ', `${config.api_ords}/tdc_todos/?q={"id":${todoId}}`);
 
   axios.delete(`${config.api_ords}/todos/?q={"id":${todoId}}`)
     .then(function (response) {

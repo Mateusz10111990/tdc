@@ -53,9 +53,9 @@ module.exports.post = post;
  
 function insertUser(user, cb) {
 
-    console.log('Executing POST ', `${config.api_ords}/users`);
+    console.log('Executing POST ', `${config.api_ords}/tdc_users`);
 
-    axios.post(`${config.api_ords}/users/`, user)
+    axios.post(`${config.api_ords}/tdc_users/`, user)
         .then(function (res) {
             cb(null, {
                 id: res.data.id,
