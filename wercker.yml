@@ -1,7 +1,10 @@
 box: node
 
 build:
- steps:
+  # Read more about steps on our dev center:
+  # http://devcenter.wercker.com/docs/steps/index.html
+  steps:
+    # A step that executes `npm install` command
     - npm-install
     - script:
         name: Building Angular sources
