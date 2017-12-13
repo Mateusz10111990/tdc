@@ -21,6 +21,9 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - script:
+        name: copy files to the pipeline
+        code: cp -R . "$WERCKER_OUTPUT_DIR"
 
 build-appcontainer:
   steps:
@@ -38,6 +41,9 @@ build-appcontainer:
 
 push:
   steps:
+    - script:
+        name: copy
+        code: cp -R /pipeline/source/. /usr/src/app/
     # Push to public docker repo
     - internal/docker-push:
         username: $DOCKER_USERNAME
