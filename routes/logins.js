@@ -15,6 +15,8 @@ function post(req, res, next) {
         .then(response => {
             var user = response.data.items[0];
 
+            console.log(response);
+            
             bcrypt.compare(req.body.password, user.password, function (err, pwMatch) {
                 var payload;
 

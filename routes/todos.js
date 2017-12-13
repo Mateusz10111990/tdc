@@ -4,11 +4,11 @@ const axios = require('axios');
 var config = require(__dirname + '/../config.js');
 
 function get(req, res, next) {
-  let authorId = req.params.author_id;
+  let author = req.params.author;
   
-  console.log('Executing GET ', `${config.api_ords}/tdc_todos?q={"author_id":${authorId}}`);
+  console.log('Executing GET ', `${config.api_ords}/tdc_todos?q={"author":${author}}`);
 
-  axios.get(`${config.api_ords}/tdc_todos?q={"author_id":${authorId}}`)
+  axios.get(`${config.api_ords}/tdc_todos?q={"author_id":${author}}`)
     .then(todos => {
       res.status(200).json(todos.data);
     })
@@ -20,7 +20,7 @@ function get(req, res, next) {
 function post(req, res, next) {
 
   var todo = {
-    author_id: req.body.author_id,
+    author: req.body.author,
     title: req.body.title,
     description: req.body.description,
     priority: req.body.priority

@@ -18,7 +18,7 @@ export class AddTodoComponent implements OnInit {
   		priority:'',
   		description:'',
 		  id:'',
-		  author_id:''
+		  author:''
   	}
   }
 

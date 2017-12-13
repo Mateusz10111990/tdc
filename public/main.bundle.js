@@ -302,8 +302,8 @@ var TodoService = (function () {
         this.http = http;
         this.apiurl = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiurl;
     }
-    TodoService.prototype.getAllTodos = function (authorId) {
-        var URI = this.apiurl + "/todos/" + authorId;
+    TodoService.prototype.getAllTodos = function (author) {
+        var URI = this.apiurl + "/todos/" + author;
         return this.http.get(URI, this.jwt())
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.items; });
@@ -315,8 +315,8 @@ var TodoService = (function () {
     };
     TodoService.prototype.addTodo = function (todo) {
         var URI = this.apiurl + "/todos";
-        todo.author_id = this.userid();
-        var body = JSON.stringify({ author_id: todo.author_id, title: todo.title, description: todo.description, priority: todo.priority });
+        todo.author = this.userid();
+        var body = JSON.stringify({ author: todo.author, title: todo.title, description: todo.description, priority: todo.priority });
         return this.http.post(URI, body, this.jwt())
             .map(function (res) { return res.json(); });
     };
@@ -467,7 +467,7 @@ var AddTodoComponent = (function () {
             priority: '',
             description: '',
             id: '',
-            author_id: ''
+            author: ''
         };
     };
     AddTodoComponent.prototype.onSubmit = function () {

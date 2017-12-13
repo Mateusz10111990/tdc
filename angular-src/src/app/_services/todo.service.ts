@@ -12,8 +12,8 @@ export class TodoService {
 
   constructor(private http: Http) { }
 
-  public getAllTodos(authorId: string): Observable<Todo[]> {
-    let URI = `${this.apiurl}/todos/${authorId}`;
+  public getAllTodos(author: string): Observable<Todo[]> {
+    let URI = `${this.apiurl}/todos/${author}`;
     return this.http.get(URI, this.jwt())
       .map(res => res.json())
       .map(res => <Todo[]>res.items);
@@ -27,8 +27,8 @@ export class TodoService {
 
   public addTodo(todo: Todo) {
     let URI = `${this.apiurl}/todos`;
-    todo.author_id =  this.userid();
-    let body = JSON.stringify({ author_id: todo.author_id, title: todo.title, description: todo.description, priority: todo.priority });
+    todo.author =  this.userid();
+    let body = JSON.stringify({ author: todo.author, title: todo.title, description: todo.description, priority: todo.priority });
     return this.http.post(URI, body, this.jwt())
       .map(res => res.json());
   }
