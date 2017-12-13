@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 router = express.Router();
 
 router.get('/posts', posts.get);
-router.get('/todos/:author_id', auth(), todos.get);
+router.get('/todos/:author', auth(), todos.get);
 //router.get('/todos', todos.get);
 router.get('/todos2', auth('ADMIN'), todos.get);
 router.post('/users', users.post);
