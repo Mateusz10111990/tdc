@@ -1,29 +1,7 @@
-# This references the default nodejs container from
-# the Docker Hub: https://registry.hub.docker.com/_/node/
-# If you want Nodesource's container you would reference nodesource/node
-# Read more about containers on our dev center
-# http://devcenter.wercker.com/docs/containers/index.html
 box: node
-# This is the build pipeline. Pipelines are the core of wercker
-# Read more about pipelines on our dev center
-# http://devcenter.wercker.com/docs/pipelines/index.html
-# You can also use services such as databases. Read more on our dev center:
-# http://devcenter.wercker.com/docs/services/index.html
-# services:
-    # - postgres
-    # http://devcenter.wercker.com/docs/services/postgresql.html
 
-    # - mongo
-    # http://devcenter.wercker.com/docs/services/mongodb.html
 build:
-  # The steps that will be executed on build
-  # Steps make up the actions in your pipeline
-  # Read more about steps on our dev center:
-  # http://devcenter.wercker.com/docs/steps/index.html
-    # A step that executes `npm install` command
     - npm-install
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
     - script:
         name: Building Angular sources
         code: |
@@ -32,6 +10,7 @@ build:
           #npm install -g @angular/cli@latest
           #npm install
           #ng build
+
  build-appcontainer:
   steps:
     - script:
@@ -40,12 +19,12 @@ build:
         sudo apt-get update -y
         sudo apt-get upgrade -y
         sudo apt-get install -y zip
-
     - script:
         name: Create ACCS zip
         code: |
           mkdir target
           zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
+
 push:
   steps:
     # Push to public docker repo
