@@ -7,7 +7,6 @@ box: node
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
-
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 # services:
@@ -16,16 +15,13 @@ box: node
 
     # - mongo
     # http://devcenter.wercker.com/docs/services/mongodb.html
-
 build:
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
-
     # A step that executes `npm install` command
     - npm-install
-
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
@@ -36,8 +32,6 @@ build:
           #npm install -g @angular/cli@latest
           #npm install
           #ng build
-          #cd .. 
- 
  build-appcontainer:
   steps:
     - script:
@@ -52,7 +46,6 @@ build:
         code: |
           mkdir target
           zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
-
 push:
   steps:
     # Push to public docker repo
@@ -84,4 +77,4 @@ restart-occs:
         occs_password: $OCCS_PASSWORD
         rest_server_url: $REST_SERVER_URL
         function: $FUNCTION
-        deployment_name: $DEPLOYMENT_NAME 
+        deployment_name: $DEPLOYMENT_NAME
