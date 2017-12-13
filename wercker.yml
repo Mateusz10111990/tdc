@@ -42,7 +42,7 @@ push:
         password: $DOCKER_PASSWORD
         tag: latest
         repository: $DOCKER_REPOSITORY
-        registry: https://registry.hub.docker.com
+        registry: https://registry.hub.docker.com/v2
         cmd: npm start
 
 deploy-accs:
