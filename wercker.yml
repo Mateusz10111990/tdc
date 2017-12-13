@@ -53,6 +53,7 @@ push:
         registry: https://registry.hub.docker.com/v2
         cmd: npm start
         working-dir: /usr/src/app
+        env: "NODE_TLS_REJECT_UNAUTHORIZED=0"
         ports: 3000
 
 deploy-accs:
