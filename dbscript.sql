@@ -67,11 +67,25 @@ insert into tdc_posts (id, content) values (10, 'Vestibulum mi purus, ornare ut 
 
 
 create table tdc_todos(
+id number not null,
 author number not null,
 title varchar2(200 byte) not null,
 description varchar2(512 byte) not null,
 priority varchar2(200 byte) not null
 );
+
+create sequence tdc_tods_seq;
+ 
+create or replace trigger bir_tdc_todos_trg
+   before insert on tdc_todos
+   for each row
+begin
+   if :new.id is null
+   then
+      :new.id := tdc_todos_seq.nextval;
+   end if;
+end bir_tdc_todos_trg;
+/
 
 DECLARE
   PRAGMA AUTONOMOUS_TRANSACTION;
