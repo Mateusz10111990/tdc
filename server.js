@@ -10,7 +10,7 @@ var users = require(__dirname + '/routes/users.js');
 var logins = require(__dirname + '/routes/logins.js');
 var app;
 var router;
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 app = express();
 

@@ -1,6 +1,5 @@
-box:
- id: node:latest
- ports:
+box: node:6.1.0
+ports:
    - "3000"
 
 build:
@@ -35,7 +34,7 @@ build-appcontainer:
         name: Create ACCS zip
         code: |
           mkdir target
-          zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
+          zip -r target/tdc.zip config.js package.json public routes node_modules server.js manifest.json
 
 push:
   steps:
