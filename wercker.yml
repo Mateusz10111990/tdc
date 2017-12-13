@@ -1,8 +1,13 @@
-box: node
+box:
+ id: node:latest
+ ports:
+   - "3000"
 
 build:
   steps:
+    
     - npm-install
+    - npm-test
     - script:
         name: Building Angular sources
         code: |
