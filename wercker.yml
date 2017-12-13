@@ -5,9 +5,7 @@ box:
 
 build:
   steps:
-    
     - npm-install
-    - npm-test
     - script:
         name: Building Angular sources
         code: |
