@@ -6,9 +6,9 @@ var config = require(__dirname + '/../config.js');
 function get(req, res, next) {
   let authorId = req.params.author_id;
   
-  console.log('Executing GET ', `${config.api_ords}/todos?q={"author_id":${authorId}}`);
+  console.log('Executing GET ', `${config.api_ords}/tdc_todos?q={"author_id":${authorId}}`);
 
-  axios.get(`${config.api_ords}/todos?q={"author_id":${authorId}}`)
+  axios.get(`${config.api_ords}/tdc_todos?q={"author_id":${authorId}}`)
     .then(todos => {
       res.status(200).json(todos.data);
     })
@@ -26,9 +26,9 @@ function post(req, res, next) {
     priority: req.body.priority
   };
 
-  console.log('Executing POST ', `${config.api_ords}/todos`);
+  console.log('Executing POST ', `${config.api_ords}/tdc_todos`);
 
-  axios.post(`${config.api_ords}/todos/`, todo)
+  axios.post(`${config.api_ords}/tdc_todos/`, todo)
     .then(function (response) {
       console.log('POSTED');
       let newid = response.data.id;
@@ -48,7 +48,7 @@ function remove(req, res, next) {
   
   console.log('Executing DELETE ', `${config.api_ords}/tdc_todos/?q={"id":${todoId}}`);
 
-  axios.delete(`${config.api_ords}/todos/?q={"id":${todoId}}`)
+  axios.delete(`${config.api_ords}/tdc_todos/?q={"id":${todoId}}`)
     .then(function (response) {
       console.log('DELETED');
       res.status(200).json({
