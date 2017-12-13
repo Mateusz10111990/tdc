@@ -1,3 +1,6 @@
+box: node
+
+build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
@@ -46,4 +49,3 @@ deploy-accs:
         application_name: tdc-demo
         application_type: node
         file: tdc.zip
-        
