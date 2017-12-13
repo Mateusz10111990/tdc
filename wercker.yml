@@ -8,9 +8,9 @@ build:
         code: |
           echo "OK"
           #cd angular-src
-          #npm install -g @angular/cli@latest
+          #npm install @angular/cli@latest
           #npm install
-          #ng build
+          #npm run-script ng build
           #cd ..
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
@@ -19,51 +19,3 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-
- build-appcontainer:
-  steps:
-    - script:
-      name: install zip
-      code: |
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
-        sudo apt-get install -y zip
-    - script:
-        name: Create ACCS zip
-        code: |
-          mkdir target
-          zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
-
-push:
-  steps:
-    # Push to public docker repo
-    - internal/docker-push:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
-        tag: latest
-        repository: $DOCKER_REPOSITORY
-        registry: https://index.docker.io/v1/
-        cmd: npm start
-
-deploy-accs:
-  steps:
-    # Deploy to Oracle Application Container Cloud
-    - peternagy/oracle-accs-deploy@1.0.1:
-        opc_user: $OPC_USERNAME
-        opc_password: $OPC_PASSWORD
-        rest_url: $REST_URL
-        domain: $IDENTITY_DOMAIN
-        application_name: tdcDemo1
-        application_type: node
-        file: tdc.zip
-
-restart-occs:
-  steps:
-    # Manage Oracle Container Cloud Service container
-    - peternagy/oracle-occs-container-util:
-        occs_user: $OCCS_USER
-        occs_password: $OCCS_PASSWORD
-        rest_server_url: $REST_SERVER_URL
-        function: $FUNCTION
-        deployment_name: $DEPLOYMENT_NAME
-
