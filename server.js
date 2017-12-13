@@ -42,3 +42,7 @@ app.get('/', (req, res) => {
 app.listen(port, function () {
     console.log('Web server listening on localhost:' + port);
 });
+
+process.on('unhandledRejection', (reason) => {
+  console.log('UNHANDLED REJECTION. Reason: ' + reason);
+});

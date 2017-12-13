@@ -6,14 +6,14 @@ var config = require(__dirname + '/../config.js');
 function get(req, res, next) {
   let author = req.params.author;
   
-  console.log('Executing GET ', `${config.api_ords}/tdc_todos?q={"author":${author}}`);
+  console.log('-> Executing GET ', `${config.api_ords}/tdc_todos?q={"author":${author}}`);
 
-  axios.get(`${config.api_ords}/tdc_todos?q={"author_id":${author}}`)
+  axios.get(`${config.api_ords}/tdc_todos?q={"author":${author}}`)
     .then(todos => {
       res.status(200).json(todos.data);
     })
     .catch(error => {
-      res.status(500).send(error)
+      res.status(500).send(error);
     });
 }
 
