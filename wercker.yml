@@ -16,11 +16,29 @@ box: node
 
     # - mongo
     # http://devcenter.wercker.com/docs/services/mongodb.html
+
 build:
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
+
+    # A step that executes `npm install` command
+    - npm-install
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+    - script:
+        name: Building Angular sources
+        code: |
+          echo "OK"
+          #cd angular-src
+          #npm install -g @angular/cli@latest
+          #npm install
+          #ng build
+          #cd .. 
+ 
+ build-appcontainer:
   steps:
     - script:
       name: install zip
@@ -29,41 +47,41 @@ build:
         sudo apt-get upgrade -y
         sudo apt-get install -y zip
 
-    # A step that executes `npm install` command
-    #- npm-install
-
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
-    #- script:
-    #    name: Building Angular sources
-    #    code: |
-    #      echo "OK"
-          #cd angular-src
-          #npm install -g @angular/cli@latest
-          #npm install
-          #ng build
-          #cd ..
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
     - script:
         name: Create ACCS zip
         code: |
           mkdir target
           zip -r target/tdc.zip config.js package.json public routes server.js manifest.json
 
+push:
+  steps:
+    # Push to public docker repo
+    - internal/docker-push:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        tag: latest
+        repository: $DOCKER_REPOSITORY
+        registry: https://index.docker.io/v1/
+        cmd: npm start
+
 deploy-accs:
   steps:
-    - script:
-        name: List directory contents
-        code: |
-          echo `pwd`
-          echo `ls`
     # Deploy to Oracle Application Container Cloud
     - peternagy/oracle-accs-deploy@1.0.1:
         opc_user: $OPC_USERNAME
         opc_password: $OPC_PASSWORD
         rest_url: $REST_URL
         domain: $IDENTITY_DOMAIN
-        application_name: tdc-demo
+        application_name: tdcDemo1
         application_type: node
         file: tdc.zip
+
+restart-occs:
+  steps:
+    # Manage Oracle Container Cloud Service container
+    - peternagy/oracle-occs-container-util:
+        occs_user: $OCCS_USER
+        occs_password: $OCCS_PASSWORD
+        rest_server_url: $REST_SERVER_URL
+        function: $FUNCTION
+        deployment_name: $DEPLOYMENT_NAME 
