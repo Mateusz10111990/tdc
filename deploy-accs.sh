@@ -4,19 +4,19 @@ export ARCHIVE_LOCAL=tdc.zip
 
 # CREATE CONTAINER
 echo '[info] Creating container'
-curl -i -X PUT \
+curl -k -i -X PUT \
     -u "cloud.admin:uNkeMpt@2WoLf" \
     "https://gse00010793.storage.oraclecloud.com/v1/Storage-gse00010793/tdcDemoCurl"
 
 # PUT ARCHIVE IN STORAGE CONTAINER
 echo '[info] Uploading application to storage'
-curl -i -X PUT \
+curl -k -i -X PUT \
   -u "cloud.admin:uNkeMpt@2WoLf" \
   "https://gse00010793.storage.oraclecloud.com/v1/Storage-gse00010793/tdcDemoCurl/tdc.zip" \
       -T "$ARCHIVE_LOCAL"
 
 # See if application exists
-export httpCode=$(curl -i -X GET  \
+export httpCode=$(curl -i -k -X GET  \
   -u "cloud.admin:uNkeMpt@2WoLf" \
   -H "X-ID-TENANT-NAME:gse00010793" \
   -H "Content-Type: multipart/form-data" \
@@ -29,7 +29,7 @@ if [ "$httpCode" == 200 ]
 then
   # Update application
   echo '[info] Updating application...'
-  curl -i -X PUT  \
+  curl -i -k -X PUT  \
     -u "cloud.admin:uNkeMpt@2WoLf" \
     -H "X-ID-TENANT-NAME:gse00010793" \
     -H "Content-Type: multipart/form-data" \
@@ -38,7 +38,7 @@ then
 else
   # Create application and deploy
   echo '[info] Creating application...'
-  curl -i -X POST  \
+  curl -i -k -X POST  \
     -u "cloud.admin:uNkeMpt@2WoLf" \
     -H "X-ID-TENANT-NAME:gse00010793" \
     -H "Content-Type: multipart/form-data" \

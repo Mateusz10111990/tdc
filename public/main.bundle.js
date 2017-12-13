@@ -964,7 +964,7 @@ var _a;
 // The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
-    apiurl: "http://localhost:3000/api"
+    apiurl: "/api"
 };
 //# sourceMappingURL=environment.js.map
 
